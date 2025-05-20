@@ -10,13 +10,23 @@ def main(page: ft.Page):
     page.title = "Quiz em Flet"
     page.window_width = 600
     page.window_height = 500
+    page.bgcolor="#ccdceb"
 
     jogador = Jogador(nome="")
     controller = None
     tema_selecionado = None
 
     nome_input = ft.TextField(label="Digite seu nome", width=300)
-    iniciar_btn = ft.ElevatedButton(text="Iniciar Quiz")
+    iniciar_btn = ft.ElevatedButton(text="Iniciar Quiz",
+                                    bgcolor=ft.Colors.PURPLE,
+                                    color=ft.Colors.WHITE,
+                                    width=150,
+                                    height=50,
+                                    style=ft.ButtonStyle(
+                                        text_style=ft.TextStyle(size=20),
+                                        shape=ft.RoundedRectangleBorder(radius=20),
+                                        padding=20)
+                                    )
 
     def botao_voltar():
         return ft.IconButton(
@@ -28,17 +38,56 @@ def main(page: ft.Page):
     def mostrar_tela_inicial(e=None):
         page.controls.clear()
         page.controls.append(
-            ft.Column(
-                [
-                    ft.Text("🎮 Bem-vindo ao Super Quiz!", size=28, weight="bold", color="purple"),
-                    ft.Text("Escolha um tema para começar:", size=18),
-                    ft.ElevatedButton(text="Curiosidades Gerais", on_click=lambda e: selecionar_tema("curiosidades")),
-                    ft.ElevatedButton(text="Música", on_click=lambda e: selecionar_tema("musica")),
-                    ft.ElevatedButton(text="Pegadinhas e Lógica", on_click=lambda e: selecionar_tema("logica")),
-                ],
-                alignment=ft.MainAxisAlignment.CENTER,
-                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                expand=True
+            ft.Container(
+                content=ft.Column(
+                    [
+                        ft.Text("Bem-vindo ao Quiz!", 
+                                size=35, 
+                                weight="bold", 
+                                color="#57689e",
+                                text_align=ft.TextAlign.CENTER
+                                ),
+                        ft.Text("Escolha um tema para começar:", size=20, weight="medium"),
+                        ft.ElevatedButton(text="Curiosidades Gerais", 
+                                            on_click=lambda e: selecionar_tema("curiosidades"),
+                                            bgcolor=ft.Colors.WHITE,
+                                            color="#57689e",
+                                            width=250,
+                                            height=40,
+                                            style=ft.ButtonStyle(
+                                                text_style=ft.TextStyle(size=19),
+                                                shape=ft.RoundedRectangleBorder(radius=15),
+                                                padding=10)
+                                        ),
+                        ft.ElevatedButton(text="Música", 
+                                            on_click=lambda e: selecionar_tema("musica"),
+                                            bgcolor=ft.Colors.WHITE,
+                                            color="#57689e",
+                                            width=250,
+                                            height=40,
+                                            style=ft.ButtonStyle(
+                                                text_style=ft.TextStyle(size=19),
+                                                shape=ft.RoundedRectangleBorder(radius=15),
+                                                padding=10)
+                                        ),
+                        ft.ElevatedButton(text="Pegadinhas e Lógica", 
+                                            on_click=lambda e: selecionar_tema("logica"),
+                                            bgcolor=ft.Colors.WHITE,
+                                            color="#57689e",
+                                            width=250,
+                                            height=40,
+                                            style=ft.ButtonStyle(
+                                                text_style=ft.TextStyle(size=19),
+                                                shape=ft.RoundedRectangleBorder(radius=15),
+                                                padding=10)
+                                        ),
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    expand=True
+                ),
+                expand=True,
+                alignment=ft.alignment.center
             )
         )
         page.update()
@@ -51,16 +100,20 @@ def main(page: ft.Page):
     def mostrar_tela_nome(e=None):
         page.controls.clear()
         page.controls.append(
-            ft.Column(
-                [
-                    botao_voltar(),
-                    ft.Text("Digite seu nome para começar o quiz:", size=22),
-                    nome_input,
-                    iniciar_btn
-                ],
-                alignment=ft.MainAxisAlignment.CENTER,
-                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                expand=True
+            ft.Container(
+                content=ft.Column(
+                    [
+                        botao_voltar(),
+                        ft.Text("Digite seu nome para começar o quiz:", size=22),
+                        nome_input,
+                        iniciar_btn
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    expand=True
+                ),
+                expand=True,
+                alignment=ft.alignment.center,
             )
         )
         page.update()
@@ -74,9 +127,6 @@ def main(page: ft.Page):
             return
 
         pergunta = controller.obter_pergunta_atual()
-        page.controls.append(botao_voltar())
-        page.controls.append(ft.Text(pergunta.texto, size=20, weight="bold"))
-
         alternativa_buttons = []
 
         async def esperar_e_mostrar():
@@ -87,7 +137,6 @@ def main(page: ft.Page):
             correta = pergunta.correta
             controller.responder(indice)
 
-            # Muda cores dos botões
             for i, btn in enumerate(alternativa_buttons):
                 if i == correta:
                     btn.bgcolor = ft.Colors.GREEN
@@ -100,11 +149,31 @@ def main(page: ft.Page):
 
             page.run_task(esperar_e_mostrar)
 
-        for i, alt in enumerate(pergunta.alternativas):
-            btn = ft.ElevatedButton(text=alt, width=500)
-            btn.on_click = lambda e, idx=i: responder(idx)
+        def criar_botao_alternativa(texto, indice):
+            btn = ft.ElevatedButton(text=texto, width=500)
+            btn.on_click = lambda e: responder(indice)
             alternativa_buttons.append(btn)
-            page.controls.append(btn)
+            return btn
+
+        conteudo = ft.Column(
+            [
+                botao_voltar(),
+                ft.Text(pergunta.texto, size=20, weight="bold", text_align=ft.TextAlign.CENTER),
+            ] + [
+                criar_botao_alternativa(alt, i) for i, alt in enumerate(pergunta.alternativas)
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            spacing=15
+        )
+
+        page.controls.append(
+            ft.Container(
+                content=conteudo,
+                expand=True,
+                alignment=ft.alignment.center
+            )
+        )
 
         page.update()
 
@@ -153,23 +222,26 @@ def main(page: ft.Page):
         )
 
         page.controls.append(
-            ft.Column(
-                [
-                    botao_voltar(),
-                    ft.Text(f"Pontuação: {jogador.pontuacao}", size=22, color="green"),
-                    ft.Text("🏅 Históricos anteriores:", size=18, weight="bold"),
-                    ft.Row([lupa_btn, filtro_input], alignment=ft.MainAxisAlignment.START),
-                    historico_container,
-                    ft.ElevatedButton(text="Jogar novamente", on_click=mostrar_tela_inicial),
-                ],
-                spacing=20,
+            ft.Container(
+                content=ft.Column(
+                    [
+                        botao_voltar(),
+                        ft.Text(f"Pontuação: {jogador.pontuacao}", size=22, color="green"),
+                        ft.Text("🏅 Históricos anteriores:", size=18, weight="bold"),
+                        ft.Row([lupa_btn, filtro_input], alignment=ft.MainAxisAlignment.START),
+                        historico_container,
+                        ft.ElevatedButton(text="Jogar novamente", on_click=mostrar_tela_inicial),
+                    ],
+                    spacing=20,
+                    expand=True,
+                ),
                 expand=True,
+                alignment=ft.alignment.center,
             )
         )
 
         atualizar_historico()
         page.update()
-
 
     def iniciar_quiz(e):
         nonlocal controller
@@ -182,7 +254,7 @@ def main(page: ft.Page):
             return
 
         todas_perguntas = questoes_por_tema[tema_selecionado]
-        perguntas_sorteadas = random.sample(todas_perguntas, 5)
+        perguntas_sorteadas = random.sample(todas_perguntas, 50)
         controller = QuizController(perguntas=perguntas_sorteadas, jogador=jogador)
         controller.reiniciar()
 
@@ -192,7 +264,6 @@ def main(page: ft.Page):
         try:
             with open("resultados.csv", "a", newline="", encoding="utf-8") as arquivo:
                 escritor = csv.writer(arquivo)
-                # grava nome, tema e pontuação (acertos)
                 escritor.writerow([jogador.nome, tema_selecionado, jogador.pontuacao])
         except Exception as e:
             print(f"Erro ao salvar resultado: {e}")
