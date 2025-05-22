@@ -16,21 +16,34 @@ def main(page: ft.Page):
     controller = None
     tema_selecionado = None
 
-    nome_input = ft.TextField(label="Digite seu nome", width=300)
-    iniciar_btn = ft.ElevatedButton(text="Iniciar Quiz",
-                                    bgcolor=ft.Colors.PURPLE,
-                                    color=ft.Colors.WHITE,
-                                    width=150,
-                                    height=50,
-                                    style=ft.ButtonStyle(
-                                        text_style=ft.TextStyle(size=20),
-                                        shape=ft.RoundedRectangleBorder(radius=20),
-                                        padding=20)
-                                    )
+    nome_input = ft.TextField(
+        label="Digite seu nome",
+        width=300,
+        bgcolor="#5483b3,0.2",
+        height=70,
+        color="#ffffff",
+        text_style=ft.TextStyle(size=18, weight=ft.FontWeight.W_400)
+    )
+
+    iniciar_btn = ft.ElevatedButton(
+        text="Iniciar Quiz",
+        bgcolor="#052659,0.6",
+        color="#ffffff",
+        width=150,
+        height=50,
+        style=ft.ButtonStyle(
+            text_style=ft.TextStyle(size=20, weight=ft.FontWeight.W_500),
+            shape=ft.RoundedRectangleBorder(radius=20),
+            padding=20
+        )
+    )
 
     def botao_voltar():
         return ft.IconButton(
             icon=ft.Icons.HOME,
+            icon_size=40,
+            height=50,
+            icon_color="#052659,0.7",
             tooltip="Voltar para a página inicial",
             on_click=lambda e: mostrar_tela_inicial()
         )
@@ -41,46 +54,46 @@ def main(page: ft.Page):
             ft.Container(
                 content=ft.Column(
                     [
-                        ft.Text("Bem-vindo ao Quiz!", 
-                                size=35, 
-                                weight="bold", 
+                        ft.Text("Bem-vindo ao Quiz!",
+                                size=45,
+                                weight=ft.FontWeight.W_700,
+                                height=60,
                                 color="#57689e",
-                                text_align=ft.TextAlign.CENTER
-                                ),
-                        ft.Text("Escolha um tema para começar:", size=20, weight="medium"),
-                        ft.ElevatedButton(text="Curiosidades Gerais", 
-                                            on_click=lambda e: selecionar_tema("curiosidades"),
-                                            bgcolor=ft.Colors.WHITE,
-                                            color="#57689e",
-                                            width=250,
-                                            height=40,
-                                            style=ft.ButtonStyle(
-                                                text_style=ft.TextStyle(size=19),
-                                                shape=ft.RoundedRectangleBorder(radius=15),
-                                                padding=10)
-                                        ),
-                        ft.ElevatedButton(text="Música", 
-                                            on_click=lambda e: selecionar_tema("musica"),
-                                            bgcolor=ft.Colors.WHITE,
-                                            color="#57689e",
-                                            width=250,
-                                            height=40,
-                                            style=ft.ButtonStyle(
-                                                text_style=ft.TextStyle(size=19),
-                                                shape=ft.RoundedRectangleBorder(radius=15),
-                                                padding=10)
-                                        ),
-                        ft.ElevatedButton(text="Pegadinhas e Lógica", 
-                                            on_click=lambda e: selecionar_tema("logica"),
-                                            bgcolor=ft.Colors.WHITE,
-                                            color="#57689e",
-                                            width=250,
-                                            height=40,
-                                            style=ft.ButtonStyle(
-                                                text_style=ft.TextStyle(size=19),
-                                                shape=ft.RoundedRectangleBorder(radius=15),
-                                                padding=10)
-                                        ),
+                                text_align=ft.TextAlign.CENTER),
+                        ft.Text("Escolha um tema para começar:", size=20, weight=ft.FontWeight.W_500, height=50),
+                        ft.ElevatedButton(text="Curiosidades Gerais",
+                                          on_click=lambda e: selecionar_tema("curiosidades"),
+                                          bgcolor=ft.Colors.WHITE,
+                                          color="#57689e",
+                                          width=250,
+                                          height=40,
+                                          style=ft.ButtonStyle(
+                                              text_style=ft.TextStyle(size=20, weight=ft.FontWeight.W_500),
+                                              shape=ft.RoundedRectangleBorder(radius=15),
+                                              padding=6)
+                                          ),
+                        ft.ElevatedButton(text="Música",
+                                          on_click=lambda e: selecionar_tema("musica"),
+                                          bgcolor=ft.Colors.WHITE,
+                                          color="#57689e",
+                                          width=250,
+                                          height=40,
+                                          style=ft.ButtonStyle(
+                                              text_style=ft.TextStyle(size=20, weight=ft.FontWeight.W_500),
+                                              shape=ft.RoundedRectangleBorder(radius=15),
+                                              padding=6)
+                                          ),
+                        ft.ElevatedButton(text="Pegadinhas e Lógica",
+                                          on_click=lambda e: selecionar_tema("logica"),
+                                          bgcolor=ft.Colors.WHITE,
+                                          color="#57689e",
+                                          width=250,
+                                          height=40,
+                                          style=ft.ButtonStyle(
+                                              text_style=ft.TextStyle(size=20, weight=ft.FontWeight.W_500),
+                                              shape=ft.RoundedRectangleBorder(radius=15),
+                                              padding=6)
+                                          ),
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -104,7 +117,7 @@ def main(page: ft.Page):
                 content=ft.Column(
                     [
                         botao_voltar(),
-                        ft.Text("Digite seu nome para começar o quiz:", size=22),
+                        ft.Text("Digite seu nome para começar o quiz:", size=22, height=50, weight=ft.FontWeight.W_500),
                         nome_input,
                         iniciar_btn
                     ],
@@ -150,7 +163,17 @@ def main(page: ft.Page):
             page.run_task(esperar_e_mostrar)
 
         def criar_botao_alternativa(texto, indice):
-            btn = ft.ElevatedButton(text=texto, width=500)
+            btn = ft.ElevatedButton(
+                text=texto,
+                bgcolor=ft.Colors.WHITE,
+                color="#57689e",
+                width=400,
+                height=40,
+                style=ft.ButtonStyle(
+                    text_style=ft.TextStyle(size=20, weight=ft.FontWeight.W_500),
+                    shape=ft.RoundedRectangleBorder(radius=15),
+                    padding=6)
+            )
             btn.on_click = lambda e: responder(indice)
             alternativa_buttons.append(btn)
             return btn
@@ -158,7 +181,7 @@ def main(page: ft.Page):
         conteudo = ft.Column(
             [
                 botao_voltar(),
-                ft.Text(pergunta.texto, size=20, weight="bold", text_align=ft.TextAlign.CENTER),
+                ft.Text(pergunta.texto, size=25, weight=ft.FontWeight.W_600, text_align=ft.TextAlign.CENTER, height=60),
             ] + [
                 criar_botao_alternativa(alt, i) for i, alt in enumerate(pergunta.alternativas)
             ],
@@ -188,15 +211,27 @@ def main(page: ft.Page):
             on_blur=lambda e: esconder_filtro()
         )
 
-        historico_container = ft.Column(spacing=5, expand=True)
+        historico_container = ft.Column(
+            spacing=5,
+            scroll=ft.ScrollMode.ALWAYS
+        )
+
+        historico_area = ft.Container(
+            content=historico_container,
+            width=500,
+            height=200,
+            bgcolor="#ffffff",
+            border_radius=10,
+            padding=10
+        )
 
         def atualizar_historico(filtro=""):
             historico_container.controls.clear()
             filtro_lower = filtro.lower()
-            for nome, tema, pontuacao in carregar_resultados():
+            for nome, tema, pontuacao in reversed(carregar_resultados()):
                 if filtro_lower in nome.lower() or filtro_lower in tema.lower():
                     historico_container.controls.append(
-                        ft.Text(f"{nome} - Tema: {tema} - Acertos: {pontuacao}")
+                        ft.Text(f"{nome} - Tema: {tema} - Acertos: {pontuacao}",)
                     )
             if not historico_container.controls:
                 historico_container.controls.append(ft.Text("Nenhum resultado encontrado."))
@@ -229,7 +264,7 @@ def main(page: ft.Page):
                         ft.Text(f"Pontuação: {jogador.pontuacao}", size=22, color="green"),
                         ft.Text("🏅 Históricos anteriores:", size=18, weight="bold"),
                         ft.Row([lupa_btn, filtro_input], alignment=ft.MainAxisAlignment.START),
-                        historico_container,
+                        historico_area,
                         ft.ElevatedButton(text="Jogar novamente", on_click=mostrar_tela_inicial),
                     ],
                     spacing=20,
@@ -254,7 +289,7 @@ def main(page: ft.Page):
             return
 
         todas_perguntas = questoes_por_tema[tema_selecionado]
-        perguntas_sorteadas = random.sample(todas_perguntas, 50)
+        perguntas_sorteadas = random.sample(todas_perguntas, 1)
         controller = QuizController(perguntas=perguntas_sorteadas, jogador=jogador)
         controller.reiniciar()
 
