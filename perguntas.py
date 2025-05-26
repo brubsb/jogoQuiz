@@ -25,7 +25,7 @@ perguntas_por_tema = {
         {
             "texto": "Qual é o país mais populoso do mundo?",
             "alternativas": ["Índia", "China", "Estados Unidos", "Rússia"],
-            "correta": 1
+            "correta": 0
         },
         {
             "texto": "Quem pintou a Mona Lisa?",
@@ -53,24 +53,24 @@ perguntas_por_tema = {
             "correta": 1
         },
         {
-            "texto": "Qual é o país mais populoso do mundo?",
-            "alternativas": ["Índia", "China", "Estados Unidos", "Rússia"],
+            "texto": "Quem pintou Guernica?",
+            "alternativas": ["Salvador Dalí", "Pablo Picasso", "Vincent van Gogh", "Claude Monet"],
             "correta": 1
         },
         {
-            "texto": "Quem pintou a Mona Lisa?",
-            "alternativas": ["Michelangelo", "Leonardo da Vinci", "Rafael", "Van Gogh"],
-            "correta": 1
+            "texto": "Qual elemento químico tem o símbolo W?",
+            "alternativas": ["Tungstênio", "Prata", "Estanho", "Zinco"],
+            "correta": 0
         },
         {
-            "texto": "Qual é o oceano mais profundo do mundo?",
-            "alternativas": ["Atlântico", "Índico", "Pacífico", "Ártico"],
+            "texto": "Qual país tem o menor território do mundo?",
+            "alternativas": ["Mônaco", "San Marino", "Vaticano", "Liechtenstein"],
             "correta": 2
         },
         {
-            "texto": "Quantos dentes um adulto normalmente tem?",
-            "alternativas": ["28", "30", "32", "34"],
-            "correta": 2
+            "texto": "Qual animal é conhecido por dormir em pé?",
+            "alternativas": ["Cavalo", "Gato", "Cachorro", "Elefante"],
+            "correta": 0
         },
         {
             "texto": "Qual é a língua oficial do Brasil?",
@@ -119,12 +119,12 @@ perguntas_por_tema = {
         },
         {
             "texto": "Qual metal é mais leve que a água?",
-            "alternativas": ["Alumínio", "Magnésio", "Ouro", "Mercúrio"],
+            "alternativas": ["Alumínio", "Lítio", "Ouro", "Mercúrio"],
             "correta": 1
         },
         {
             "texto": "Qual é a velocidade da luz no vácuo?",
-            "alternativas": ["300 mil km/s", "150 mil km/s", "299.792 km/s", "1 milhão km/s"],
+            "alternativas": ["300 mil km/s", "150 mil km/s", "299.792.458 m/s", "1 milhão km/s"],
             "correta": 2
         },
         {
@@ -594,7 +594,7 @@ perguntas_por_tema = {
         {
             "texto": "O que acontece com o número 8 se o colocarmos de cabeça para baixo?",
             "alternativas": ["Continua 8", "Vira infinito", "Vira 0", "Desaparece"],
-            "correta": 0
+            "correta": 1
         },
         {
             "texto": "Quem construiu a arca que salvou os animais do dilúvio?",
@@ -617,9 +617,9 @@ perguntas_por_tema = {
             "correta": 0
         },
         {
-            "texto": "Quantos meses do ano têm 28 dias?",
-            "alternativas": ["12", "1", "6", "Nenhum"],
-            "correta": 0
+            "texto": "O que é maior: o dobro de metade ou a metade do dobro?",
+            "alternativas": ["São iguais", "Dobro de metade", "Metade do dobro", "Nenhuma das duas"],
+            "correta": 0  # São iguais
         },
         {
             "texto": "Quantas letras tem o alfabeto?",
@@ -719,7 +719,7 @@ perguntas_por_tema = {
         {
             "texto": "Quantas letras tem a palavra 'alfabeto'?",
             "alternativas": ["9", "8", "10", "7"],
-            "correta":0
+            "correta":1
         },
         {
             "texto": "O que uma esponja faz quando usada para limpar?",
@@ -744,12 +744,12 @@ perguntas_por_tema = {
         {
             "texto": "Se todos a bordo de um navio estão casados, qual é a pessoa única?",
             "alternativas": ["Não há", "O capitão", "O cozinheiro", "O passageiro"],
-            "correta": 0
+            "correta": 1
         },
         {
-            "texto": "Se nove morreram, quantos sobraram?",
-            "alternativas": ["9", "Nenhum", "Todos", "1"],
-            "correta": 0
+            "texto": "Se um avião cai exatamente na fronteira entre dois países, onde enterram os sobreviventes?",
+            "alternativas": ["No primeiro país", "No segundo país", "Em nenhum lugar", "No aeroporto"],
+            "correta": 2  # Em nenhum lugar
         },
         {
             "texto": "Com três cortes, quantos pedaços se consegue?",
